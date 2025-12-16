@@ -1,0 +1,33 @@
+<h2>Confirm Booking</h2>
+
+<div *ngIf="!success">
+
+  <p>
+    Booking for Event ID:
+    <strong>{{ eventId }}</strong>
+  </p>
+
+  <div class="booking-form">
+    <label>
+      Number of Tickets:
+      <input type="number" min="1" [(ngModel)]="tickets" />
+    </label>
+
+    <button class="confirm-btn" (click)="confirmBooking()">
+      Confirm Booking
+    </button>
+  </div>
+
+</div>
+
+<!-- Success + QR -->
+<div *ngIf="success" class="success-box">
+  <h3>🎉 Booking Confirmed!</h3>
+  <p>Show this QR code at the event entrance</p>
+
+  <qrcode
+    [qrdata]="qrData"
+    [width]="200"
+    [errorCorrectionLevel]="'M'">
+  </qrcode>
+</div>

@@ -1,0 +1,42 @@
+<h2 class="page-title">Upcoming Events</h2>
+
+<!-- Loading State -->
+<div *ngIf="loading" class="loading">
+  Loading events...
+</div>
+
+<!-- Empty State -->
+<div *ngIf="!loading && events.length === 0" class="empty-state">
+  No events available
+</div>
+
+<!-- Events Grid -->
+<div class="event-grid" *ngIf="!loading && events.length > 0">
+  <div class="event-card" *ngFor="let event of events">
+    
+    <h3 class="event-title">
+      {{ event.name }}
+    </h3>
+
+    <p class="event-info">
+      <strong>Venue:</strong> {{ event.venue }}
+    </p>
+
+    <p class="event-info">
+      <strong>Date:</strong>
+      {{ event.date_time | date:'mediumDate' }}
+    </p>
+
+    <p class="event-info category">
+      {{ event.category }}
+    </p>
+
+    <button
+      class="book-btn"
+      [routerLink]="['/bookings', event.id]"
+    >
+      Book Now
+    </button>
+
+  </div>
+</div>

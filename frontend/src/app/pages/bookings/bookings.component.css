@@ -1,0 +1,31 @@
+.booking-form {
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+input {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.confirm-btn {
+  width: 100%;
+  padding: 10px;
+  background: #16a34a;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.confirm-btn:hover {
+  background: #15803d;
+}
