@@ -1,31 +1,72 @@
-.booking-form {
-  max-width: 300px;
-  margin-top: 20px;
-}
-
-label {
+.booking-container,
+.qr-container {
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
-input {
+/* Input fix */
+input[type="number"] {
+  width: 120px;
   padding: 8px;
-  font-size: 14px;
+  font-size: 16px;
+  color: #000;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-.confirm-btn {
-  width: 100%;
-  padding: 10px;
-  background: #16a34a;
-  border: none;
-  border-radius: 6px;
+/* Button */
+button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #2563eb;
   color: white;
-  font-weight: 500;
+  border: none;
   cursor: pointer;
 }
 
-.confirm-btn:hover {
-  background: #15803d;
+/* QR Fix */
+.qr-container qrcode {
+  max-width: 240px;
+}
+
+/* Light mode support */
+body.light input {
+  color: #000;
+  background: #fff;
+}
+
+input[type="number"] {
+  pointer-events: auto;
+  appearance: auto;
+  -webkit-appearance: number-input;
+  -moz-appearance: number-input;
+
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* Make spinner arrows visible & clickable */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Ensure no overlay blocks the input */
+.bookings-container,
+.booking-form {
+  pointer-events: auto;
+}
+
+.ticket-input {
+  width: 80px;
+  padding: 8px;
+  font-size: 16px;
 }

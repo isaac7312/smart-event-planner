@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/* Light Theme (default) */
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-color: #0f172a;
+  --muted-text: #475569;
+  --primary: #2563eb;
+}
+
+/* Dark Theme */
+.dark-theme {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-color: #e5e7eb;
+  --muted-text: #94a3b8;
+  --primary: #38bdf8;
+}
+
+/* Apply globally */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

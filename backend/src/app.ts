@@ -7,6 +7,7 @@ import cors from "cors";
 import eventRoutes from "./routes/eventRoutes";
 import userRoutes from "./routes/userRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
+import dashboardRoutes from './routes/dashboardRoutes';
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/events", eventRoutes);
 app.use("/users", userRoutes);
 app.use("/bookings", bookingRoutes);
+app.use('/api', dashboardRoutes);
 
 
 app.get("/health", (req, res) => {

@@ -4,8 +4,13 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],   // ✅ VERY IMPORTANT
+  imports: [RouterModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+
+  toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+  }
+}

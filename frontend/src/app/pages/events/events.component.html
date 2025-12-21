@@ -1,3 +1,35 @@
+<!-- Hero Section -->
+<div class="hero">
+  <h1>Discover & Book Events Seamlessly</h1>
+  <p>
+    Find tech conferences, workshops, and meetups all in one place.
+  </p>
+  <a routerLink="/events" class="hero-btn">
+    Browse Events
+  </a>
+</div>
+
+<!-- Search & Filter -->
+<div class="filter-bar">
+  <input
+    type="text"
+    placeholder="Search events..."
+    [(ngModel)]="searchText"
+    class="search-input"
+  />
+
+  <select
+    class="filter-select"
+    [(ngModel)]="selectedCategory"
+  >
+    <option value="">All Categories</option>
+    <option value="Tech">Tech</option>
+    <option value="Workshop">Workshop</option>
+    <option value="Music">Music</option>
+    <option value="Business">Business</option>
+  </select>
+</div>
+
 <h2 class="page-title">Upcoming Events</h2>
 
 <!-- Loading State -->
@@ -6,36 +38,53 @@
 </div>
 
 <!-- Empty State -->
-<div *ngIf="!loading && events.length === 0" class="empty-state">
+<div *ngIf="!loading && filteredEvents.length === 0" class="empty-state">
   No events available
 </div>
 
 <!-- Events Grid -->
-<div class="event-grid" *ngIf="!loading && events.length > 0">
-  <div class="event-card" *ngFor="let event of events">
-    
+<div class="event-grid" *ngIf="!loading && filteredEvents.length > 0">
+  <div class="event-card" *ngFor="let event of filteredEvents">
+
+    <!-- Event Name -->
     <h3 class="event-title">
       {{ event.name }}
     </h3>
 
+    <!-- Venue -->
     <p class="event-info">
       <strong>Venue:</strong> {{ event.venue }}
     </p>
 
+    <!-- Date -->
     <p class="event-info">
       <strong>Date:</strong>
       {{ event.date_time | date:'mediumDate' }}
     </p>
 
+    <!-- Category -->
     <p class="event-info category">
       {{ event.category }}
     </p>
 
+    <!-- ✅ AVAILABLE SEATS (STEP 2 ADDITION) -->
+    <p class="event-info">
+      <strong>Available Seats:</strong>
+      {{ event.capacity - event.booked }}
+    </p>
+
+    <!-- ✅ SOLD OUT LABEL -->
+    <p *ngIf="event.capacity - event.booked <= 0" class="sold-out">
+      Sold Out
+    </p>
+
+    <!-- ✅ BOOK BUTTON WITH DISABLE LOGIC -->
     <button
       class="book-btn"
-      [routerLink]="['/bookings', event.id]"
+      [disabled]="event.capacity - event.booked <= 0"
+      [routerLink]="event.capacity - event.booked > 0 ? ['/bookings', event.id] : null"
     >
-      Book Now
+      {{ event.capacity - event.booked > 0 ? 'Book Now' : 'Sold Out' }}
     </button>
 
   </div>

@@ -2,8 +2,40 @@
   <div class="logo">Smart Event Planner</div>
 
   <ul class="nav-links">
-    <li><a routerLink="/events">Events</a></li>
-    <li><a routerLink="/bookings">Bookings</a></li>
-    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li>
+      <a
+        routerLink="/events"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link"
+      >
+        Events
+      </a>
+    </li>
+
+    <!-- ✅ STEP 1D.3: ADD EVENT LINK -->
+    <li>
+      <a
+        routerLink="/add-event"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Add Event
+      </a>
+    </li>
+
+    <li>
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Dashboard
+      </a>
+    </li>
   </ul>
 </nav>
+
+<button class="theme-toggle" (click)="toggleTheme()">
+  🌙
+</button>

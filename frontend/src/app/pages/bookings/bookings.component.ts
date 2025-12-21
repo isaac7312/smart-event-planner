@@ -1,43 +1,47 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { QRCodeModule } from 'angularx-qrcode';
+import { HttpClient } from '@angular/common/http'; // ✅ ADD THIS
 
 @Component({
   selector: 'app-bookings',
   standalone: true,
-  imports: [CommonModule, FormsModule, QRCodeModule],
+  imports: [CommonModule, RouterModule, FormsModule, QRCodeModule],
   templateUrl: './bookings.component.html',
   styleUrls: ['./bookings.component.css']
 })
 export class BookingsComponent {
 
-  eventId!: number;
-  tickets = 1;
-  success = false;
+  tickets: number = 1;
+  bookingConfirmed = false;
   qrData = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private http: HttpClient
-  ) {
-    this.eventId = Number(this.route.snapshot.paramMap.get('id'));
-  }
+  constructor(private http: HttpClient) {} // ✅ ADD THIS
 
+  // ✅ STEP 3 CODE IS HERE
   confirmBooking() {
-    const bookingData = {
-      attendee_id: 1,
-      event_id: this.eventId,
-      tickets_booked: this.tickets,
-      total_price: this.tickets * 500
-    };
+    console.log('🚀 Confirm clicked');
 
-    this.http.post('http://localhost:3000/bookings', bookingData)
-      .subscribe(() => {
-        this.success = true;
-        this.qrData = `EVENT-${this.eventId}-TICKETS-${this.tickets}`;
-      });
+    this.http.post<any>('http://localhost:3000/bookings', {
+      eventId: 1,
+      tickets: this.tickets
+    }).subscribe({
+      next: (res) => {
+        console.log('✅ Backend response', res);
+
+        this.bookingConfirmed = true;
+
+        this.qrData = JSON.stringify({
+          bookingId: res.bookingId,
+          tickets: this.tickets,
+          app: 'Smart Event Planner'
+        });
+      },
+      error: (err) => {
+        console.error('❌ Booking failed', err);
+      }
+    });
   }
 }

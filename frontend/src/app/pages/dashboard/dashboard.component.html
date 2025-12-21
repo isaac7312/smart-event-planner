@@ -1,7 +1,24 @@
-<h2>Dashboard</h2>
+<h2 class="page-title">Dashboard</h2>
 
-<div class="stats">
-  <div class="card">Total Events: 5</div>
-  <div class="card">Total Users: 120</div>
-  <div class="card">Bookings Today: 18</div>
+<div *ngIf="loading" class="loading">
+  Loading dashboard...
+</div>
+
+<div class="dashboard-grid" *ngIf="!loading">
+
+  <div class="stat-card">
+    <h3>📅 Events</h3>
+    <p class="count">{{ totalEvents }}</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>👥 Users</h3>
+    <p class="count">{{ totalUsers }}</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>🎟 Bookings</h3>
+    <p class="count">{{ totalBookings }}</p>
+  </div>
+
 </div>

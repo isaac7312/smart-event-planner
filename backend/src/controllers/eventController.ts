@@ -23,7 +23,16 @@ export const createEvent = (req: Request, res: Response) => {
 };
 
 export const getAllEvents = (req: Request, res: Response) => {
-  db.query("SELECT * FROM events", (err, results) => {
+  const query = `
+    SELECT 
+      e.*,
+      IFNULL(SUM(b.tickets_booked), 0) AS booked
+    FROM events e
+    LEFT JOIN bookings b ON e.id = b.event_id
+    GROUP BY e.id
+  `;
+
+  db.query(query, (err, results) => {
     if (err) {
       return res.status(500).json({ message: "Error fetching events" });
     }
