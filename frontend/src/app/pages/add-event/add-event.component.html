@@ -1,11 +1,46 @@
 <h2>Add New Event</h2>
 
-<input type="text" placeholder="Event Name" [(ngModel)]="event.name" />
-<input type="text" placeholder="Description" [(ngModel)]="event.description" />
-<input type="text" placeholder="Venue" [(ngModel)]="event.venue" />
-<input type="text" placeholder="Category" [(ngModel)]="event.category" />
-<input type="date" [(ngModel)]="event.date_time" />
-<input type="number" placeholder="Capacity" [(ngModel)]="event.capacity" />
+<input
+  type="text"
+  placeholder="Event Name"
+  [(ngModel)]="event.name"
+  required
+/>
+
+<input
+  type="text"
+  placeholder="Description"
+  [(ngModel)]="event.description"
+/>
+
+<input
+  type="text"
+  placeholder="Venue"
+  [(ngModel)]="event.venue"
+  required
+/>
+
+<input
+  type="text"
+  placeholder="Category"
+  [(ngModel)]="event.category"
+/>
+
+<input
+  type="date"
+  [(ngModel)]="event.date_time"
+  required
+/>
+
+<!-- ✅ FIXED CAPACITY INPUT -->
+<input
+  type="number"
+  min="1"
+  step="1"
+  placeholder="Capacity"
+  [(ngModel)]="event.capacity"
+  required
+/>
 
 <button (click)="createEvent()">Create Event</button>
 

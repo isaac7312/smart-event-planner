@@ -18,7 +18,7 @@ export class AddEventComponent {
     venue: '',
     category: '',
     date_time: '',
-    capacity: 0
+    capacity: 1   // ✅ FIXED
   };
 
   successMessage = '';

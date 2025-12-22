@@ -46,28 +46,24 @@
 <div class="event-grid" *ngIf="!loading && filteredEvents.length > 0">
   <div class="event-card" *ngFor="let event of filteredEvents">
 
-    <!-- Event Name -->
     <h3 class="event-title">
       {{ event.name }}
     </h3>
 
-    <!-- Venue -->
     <p class="event-info">
       <strong>Venue:</strong> {{ event.venue }}
     </p>
 
-    <!-- Date -->
     <p class="event-info">
       <strong>Date:</strong>
       {{ event.date_time | date:'mediumDate' }}
     </p>
 
-    <!-- Category -->
     <p class="event-info category">
       {{ event.category }}
     </p>
 
-    <!-- ✅ AVAILABLE SEATS (STEP 2 ADDITION) -->
+    <!-- ✅ AVAILABLE SEATS -->
     <p class="event-info">
       <strong>Available Seats:</strong>
       {{ event.capacity - event.booked }}
@@ -78,7 +74,7 @@
       Sold Out
     </p>
 
-    <!-- ✅ BOOK BUTTON WITH DISABLE LOGIC -->
+    <!-- ✅ BOOK BUTTON -->
     <button
       class="book-btn"
       [disabled]="event.capacity - event.booked <= 0"
