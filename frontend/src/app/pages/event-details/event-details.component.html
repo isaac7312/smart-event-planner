@@ -1,0 +1,18 @@
+<div *ngIf="loading">Loading event...</div>
+
+<div *ngIf="!loading && event" class="event-details">
+  <h2>{{ event.name }}</h2>
+
+  <p><strong>Description:</strong> {{ event.description }}</p>
+  <p><strong>Venue:</strong> {{ event.venue }}</p>
+  <p><strong>Date:</strong> {{ event.date_time | date:'medium' }}</p>
+  <p><strong>Category:</strong> {{ event.category }}</p>
+  <p><strong>Capacity:</strong> {{ event.capacity }}</p>
+
+  <button
+    class="book-btn"
+    [routerLink]="['/events', event.id, 'book']"
+  >
+    Book Tickets
+  </button>
+</div>

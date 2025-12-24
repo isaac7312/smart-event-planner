@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { createBooking } from '../controllers/bookingController';
+import { authenticate } from '../middleware/authMiddleware';
 
 const router = Router();
 
-router.post('/', createBooking);
+// 🔐 LOGIN REQUIRED
+router.post('/', authenticate, createBooking);
 
 export default router;

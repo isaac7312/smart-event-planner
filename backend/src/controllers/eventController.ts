@@ -56,3 +56,43 @@ export const getAllEvents = (req: Request, res: Response) => {
   });
 };
 
+export const getEventById = (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  db.query(
+    'SELECT * FROM events WHERE id = ?',
+    [id],
+    (err, results: any[]) => {
+      if (err) {
+        return res.status(500).json({ message: 'Server error' });
+      }
+
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Event not found' });
+      }
+
+      res.json(results[0]);
+    }
+  );
+};
+
+export const getMyEvents = (req: any, res: any) => {
+  const organizerId = req.user.id;
+
+  db.query(
+    'SELECT * FROM events WHERE organizer_id = ?',
+    [organizerId],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: 'Failed to fetch events' });
+      }
+      res.json(results);
+    }
+  );
+};
+
+
+
+
+
+

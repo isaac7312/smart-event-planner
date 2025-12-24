@@ -8,7 +8,7 @@ export const createBooking = (req: Request, res: Response) => {
     return res.status(400).json({ message: 'Invalid booking data' });
   }
 
-  const attendeeId = 1; // TEMP user
+  const attendeeId = (req as any).user.id;// TEMP user
   const pricePerTicket = 100;
 
   // 1️⃣ Get event capacity

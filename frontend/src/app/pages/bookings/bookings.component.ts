@@ -25,12 +25,10 @@ export class BookingsComponent implements OnInit {
     private router: Router
   ) {}
 
-  // ✅ GET EVENT ID FROM URL
   ngOnInit(): void {
     this.eventId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
-  // ✅ STEP 4 (BOOKING + REDIRECT)
   confirmBooking() {
     if (this.tickets < 1) {
       alert('Tickets must be at least 1');
@@ -43,18 +41,12 @@ export class BookingsComponent implements OnInit {
     }).subscribe({
       next: () => {
         this.bookingConfirmed = true;
-
         this.qrData = JSON.stringify({
           bookingId: Date.now(),
           eventId: this.eventId,
           tickets: this.tickets,
           app: 'Smart Event Planner'
         });
-
-        // ✅ STEP 4 ADDITION (AUTO REFRESH EVENTS)
-        setTimeout(() => {
-          this.router.navigate(['/events']);
-        }, 500);
       },
       error: (err) => {
         alert(err.error.message || 'Booking failed');

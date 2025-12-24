@@ -1,8 +1,8 @@
-import { Router } from 'express';
+import express from 'express';
 import { getDashboardCounts } from '../controllers/dashboardController';
 
-const router = Router();
+const router = express.Router();
 
-router.get('/', getDashboardCounts);
+router.get('/counts',getDashboardCounts);
 
 export default router;
