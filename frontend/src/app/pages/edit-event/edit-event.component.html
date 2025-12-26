@@ -1,0 +1,14 @@
+<h2>Edit Event</h2>
+
+<input [(ngModel)]="event.name" placeholder="Event Name">
+<input [(ngModel)]="event.description" placeholder="Description">
+<input [(ngModel)]="event.venue" placeholder="Venue">
+<input [(ngModel)]="event.category" placeholder="Category">
+<input type="datetime-local" [(ngModel)]="event.date_time">
+<input type="number" [(ngModel)]="event.capacity" min="1">
+<input type="number" [(ngModel)]="event.price" min="0">
+
+<button (click)="updateEvent()">Update Event</button>
+
+<p style="color:green">{{ successMessage }}</p>
+<p style="color:red">{{ errorMessage }}</p>

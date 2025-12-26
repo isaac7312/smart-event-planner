@@ -16,7 +16,6 @@ export class EventsComponent implements OnInit {
   events: any[] = [];
   loading = true;
 
-  // ✅ search & filter state
   searchText: string = '';
   selectedCategory: string = '';
 
@@ -24,8 +23,15 @@ export class EventsComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventService.getEvents().subscribe({
-      next: (data) => {
-        this.events = data;
+      next: (data: any[]) => {
+
+        // ✅ FIX: convert booked → number
+        this.events = data.map(event => ({
+          ...event,
+          booked: Number(event.booked),
+          price: Number(event.price ?? 0)
+        }));
+
         this.loading = false;
       },
       error: () => {
@@ -34,7 +40,6 @@ export class EventsComponent implements OnInit {
     });
   }
 
-  // ✅ Search + Category filter
   get filteredEvents() {
     return this.events.filter(event => {
       const matchesSearch =
@@ -45,5 +50,10 @@ export class EventsComponent implements OnInit {
 
       return matchesSearch && matchesCategory;
     });
+  }
+
+  // ✅ helper for seats
+  availableSeats(event: any): number {
+    return event.capacity - event.booked;
   }
 }

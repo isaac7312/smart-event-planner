@@ -1,48 +1,55 @@
-<h2>Add New Event</h2>
+<div class="add-event-wrapper">
+  <div class="form-card">
 
-<input
-  type="text"
-  placeholder="Event Name"
-  [(ngModel)]="event.name"
-  required
-/>
+    <h2>Add New Event</h2>
+    <p class="subtitle">Create and publish your event</p>
 
-<input
-  type="text"
-  placeholder="Description"
-  [(ngModel)]="event.description"
-/>
+    <form (ngSubmit)="createEvent()" #eventForm="ngForm">
 
-<input
-  type="text"
-  placeholder="Venue"
-  [(ngModel)]="event.venue"
-  required
-/>
+      <div class="form-grid">
 
-<input
-  type="text"
-  placeholder="Category"
-  [(ngModel)]="event.category"
-/>
+        <div class="form-group">
+          <label>Event Name</label>
+          <input type="text" name="name" [(ngModel)]="event.name" required />
+        </div>
 
-<input
-  type="date"
-  [(ngModel)]="event.date_time"
-  required
-/>
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" name="category" [(ngModel)]="event.category" required />
+        </div>
 
-<!-- ✅ FIXED CAPACITY INPUT -->
-<input
-  type="number"
-  min="1"
-  step="1"
-  placeholder="Capacity"
-  [(ngModel)]="event.capacity"
-  required
-/>
+        <div class="form-group">
+          <label>Venue</label>
+          <input type="text" name="venue" [(ngModel)]="event.venue" required />
+        </div>
 
-<button (click)="createEvent()">Create Event</button>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" name="date_time" [(ngModel)]="event.date_time" required />
+        </div>
 
-<p *ngIf="successMessage">{{ successMessage }}</p>
-<p *ngIf="errorMessage">{{ errorMessage }}</p>
+        <div class="form-group">
+          <label>Capacity</label>
+          <input type="number" min="0" ste="1" name="capacity" [(ngModel)]="event.capacity" required />
+        </div>
+
+        <div class="form-group">
+          <label>Price (₹)</label>
+          <input type="number" min="0" step="1" name="price" [(ngModel)]="event.price" required />
+        </div>
+
+        <div class="form-group full">
+          <label>Description</label>
+          <textarea name="description" [(ngModel)]="event.description"></textarea>
+        </div>
+
+      </div>
+
+      <button class="submit-btn" type="submit">
+        Create Event
+      </button>
+
+    </form>
+
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import { AuthGuard } from './guards/auth.guard';
 import { EventsComponent } from './pages/events/events.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { AddEventComponent } from './pages/add-event/add-event.component';
@@ -17,8 +17,28 @@ export const routes: Routes = [
 
   // Organizer routes
   { path: 'add-event', component: AddEventComponent },
-  { path: 'organizer/dashboard', component: OrganizerDashboardComponent },
-
+  { path: 'dashboard', component: OrganizerDashboardComponent,  canActivate: [AuthGuard] },
+  {
+  path: 'add-event',
+  component: AddEventComponent,
+  canActivate: [AuthGuard]
+  },
   // Auth
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+
+  {
+  path: 'edit-event/:id',
+  loadComponent: () =>
+    import('./pages/edit-event/edit-event.component')
+      .then(m => m.EditEventComponent)
+  },
+
+  {
+  path: 'analytics',
+  loadComponent: () =>
+    import('./pages/analytics/analytics.component')
+      .then(m => m.AnalyticsComponent)
+  }
+
+
 ];

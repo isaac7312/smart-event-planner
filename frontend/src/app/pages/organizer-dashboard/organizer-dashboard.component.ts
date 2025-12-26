@@ -1,31 +1,66 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { RouterModule, Router } from '@angular/router';
+import { EventService } from '../../services/event.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-organizer-dashboard',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './organizer-dashboard.component.html'
+  imports: [CommonModule, RouterModule],
+  templateUrl: './organizer-dashboard.component.html',
+  styleUrls: ['./organizer-dashboard.component.css']
 })
 export class OrganizerDashboardComponent implements OnInit {
 
   events: any[] = [];
   loading = true;
+  errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private eventService: EventService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
-    this.http.get<any[]>('http://localhost:3000/events/my-events')
-      .subscribe({
-        next: (data) => {
-          this.events = data;
-          this.loading = false;
-        },
-        error: () => {
-          alert('Failed to load events');
-          this.loading = false;
-        }
-      });
+  ngOnInit(): void {
+    this.loadMyEvents();
+  }
+
+  // Load organizer events
+  loadMyEvents() {
+    this.loading = true;
+
+    this.eventService.getMyEvents().subscribe({
+      next: (data) => {
+        this.events = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.errorMessage = 'Failed to load events';
+        this.loading = false;
+      }
+    });
+  }
+
+  // ✅ REAL DELETE (BACKEND + UI)
+deleteEvent(eventId: number) {
+  if (!confirm('Are you sure you want to delete this event?')) return;
+
+  this.eventService.deleteEvent(eventId).subscribe({
+    next: () => {
+      // Remove event from UI after backend success
+      this.events = this.events.filter(e => e.id !== eventId);
+    },
+    error: () => {
+      alert('Failed to delete event');
+    }
+  });
+}
+
+  // Logout
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

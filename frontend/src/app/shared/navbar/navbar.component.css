@@ -17,27 +17,36 @@
 .nav-links {
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 32px;
   margin: 0;
   padding: 0;
 }
 
-.nav-link {
+/* Links + Logout button */
+.nav-link,
+.logout-btn {
   position: relative;
   text-decoration: none;
+  background: none;
+  border: none;
   color: #e5e7eb;
   font-size: 15px;
   font-weight: 500;
+  cursor: pointer;
+  padding: 0;
   transition: color 0.3s ease;
 }
 
-/* Hover effect */
-.nav-link:hover {
+/* Hover */
+.nav-link:hover,
+.logout-btn:hover {
   color: #ffffff;
 }
 
 /* Underline animation */
-.nav-link::after {
+.nav-link::after,
+.logout-btn::after {
   content: "";
   position: absolute;
   left: 0;
@@ -48,7 +57,8 @@
   transition: width 0.3s ease;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.logout-btn:hover::after {
   width: 100%;
 }
 
@@ -62,6 +72,7 @@
   width: 100%;
 }
 
+/* Theme toggle */
 .theme-toggle {
   margin-left: 24px;
   background: transparent;
@@ -69,4 +80,14 @@
   font-size: 18px;
   cursor: pointer;
   color: #e5e7eb;
+}
+
+.theme-toggle:hover {
+  color: #ffffff;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }

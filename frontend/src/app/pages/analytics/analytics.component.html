@@ -1,0 +1,46 @@
+<div class="analytics-wrapper">
+
+  <h2>Organizer Analytics</h2>
+
+  <!-- 📊 Stats Cards -->
+  <div class="stats">
+    <div class="card">
+      <p>Total Events</p>
+      <h3>{{ totalEvents }}</h3>
+    </div>
+
+    <div class="card">
+      <p>Total Bookings</p>
+      <h3>{{ totalBookings }}</h3>
+    </div>
+
+    <div class="card">
+      <p>Total Revenue</p>
+      <h3>₹{{ totalRevenue }}</h3>
+    </div>
+  </div>
+
+  <!-- 📈 Charts -->
+  <div class="charts">
+
+    <!-- Bookings Chart -->
+    <div class="chart-box">
+      <h4>Bookings per Event</h4>
+      <canvas id="bookingChart"></canvas>
+    </div>
+
+    <!-- Revenue Chart -->
+    <div class="chart-box">
+      <h4>Revenue per Event</h4>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <!-- Capacity Utilization Chart -->
+    <div class="chart-box">
+      <h4>Capacity Utilization (%)</h4>
+      <canvas id="utilizationChart"></canvas>
+    </div>
+
+  </div>
+
+</div>

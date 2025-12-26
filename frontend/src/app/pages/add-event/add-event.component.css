@@ -1,0 +1,91 @@
+.add-event-wrapper {
+  min-height: calc(100vh - 80px);
+  padding: 40px;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Card */
+.form-card {
+  width: 100%;
+  max-width: 800px;
+  background: #020617;
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* Headings */
+.form-card h2 {
+  color: #f8fafc;
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  margin-bottom: 30px;
+}
+
+/* Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: span 2;
+}
+
+/* Labels */
+label {
+  color: #cbd5f5;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+input, textarea {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #f8fafc;
+  outline: none;
+  font-size: 14px;
+}
+
+input:focus, textarea:focus {
+  border-color: #6366f1;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Button */
+.submit-btn {
+  margin-top: 30px;
+  width: 100%;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+}

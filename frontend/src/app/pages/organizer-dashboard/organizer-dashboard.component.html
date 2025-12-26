@@ -1,25 +1,45 @@
-<h2>Organizer Dashboard</h2>
+<div class="dashboard-wrapper">
 
-<p *ngIf="loading">Loading events...</p>
+  <div class="dashboard-header">
+    <h2>Organizer Dashboard</h2>
+    <button class="logout-btn" (click)="logout()">Logout</button>
 
-<table *ngIf="!loading && events.length > 0" border="1" cellpadding="8">
-  <tr>
-    <th>Event Name</th>
-    <th>Venue</th>
-    <th>Date</th>
-    <th>Capacity</th>
-    <th>Tickets Sold</th>
-  </tr>
+  </div>
 
-  <tr *ngFor="let event of events">
-    <td>{{ event.name }}</td>
-    <td>{{ event.venue }}</td>
-    <td>{{ event.date_time | date:'medium' }}</td>
-    <td>{{ event.capacity }}</td>
-    <td>{{ event.tickets_sold }}</td>
-  </tr>
-</table>
+  <div *ngIf="loading">Loading events...</div>
 
-<p *ngIf="!loading && events.length === 0">
-  No events created yet.
-</p>
+  <div *ngIf="!loading && events.length === 0">
+    No events created yet
+  </div>
+
+  <table *ngIf="!loading && events.length > 0">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Venue</th>
+        <th>Price</th>
+        <th>Capacity</th>
+        <th>Booked</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{ event.name }}</td>
+        <td>{{ event.date_time | date:'mediumDate' }}</td>
+        <td>{{ event.venue }}</td>
+        <td>₹{{ event.price }}</td>
+        <td>{{ event.capacity }}</td>
+        <td>{{ event.booked }}</td>
+        <td>
+          <button class="edit-btn" [routerLink]="['/edit-event', event.id]">Edit </button>
+          <button class="delete-btn" (click)="deleteEvent(event.id)">Delete</button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

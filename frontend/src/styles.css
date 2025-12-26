@@ -22,3 +22,36 @@ body {
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-y: auto;
+}
+
+/* ===== LIGHT THEME (DEFAULT) ===== */
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-header: #4f46e5;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --table-row: #f1f5f9;
+  --table-row-alt: #e2e8f0;
+}
+
+/* ===== DARK THEME ===== */
+.dark-theme {
+  --bg-main: linear-gradient(135deg, #020617, #0f172a);
+  --bg-card: #020617;
+  --bg-header: #4f46e5;
+  --text-primary: #f8fafc;
+  --text-secondary: #9ca3af;
+  --table-row: #111827;
+  --table-row-alt: #1f2933;
+}

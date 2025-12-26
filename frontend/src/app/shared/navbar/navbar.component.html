@@ -2,6 +2,7 @@
   <div class="logo">Smart Event Planner</div>
 
   <ul class="nav-links">
+    <!-- Events (Public) -->
     <li>
       <a
         routerLink="/events"
@@ -13,8 +14,8 @@
       </a>
     </li>
 
-    <!-- ✅ STEP 1D.3: ADD EVENT LINK -->
-    <li>
+    <!-- Add Event (Only when logged in) -->
+    <li *ngIf="authService.isLoggedIn()">
       <a
         routerLink="/add-event"
         routerLinkActive="active"
@@ -23,9 +24,50 @@
         Add Event
       </a>
     </li>
+
+    <!-- Dashboard (Only when logged in) -->
+    <li *ngIf="authService.isLoggedIn()">
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Dashboard
+      </a>
+    </li>
+
+    <!-- Analytics (Only when logged in) -->
+    <li *ngIf="authService.isLoggedIn()">
+      <a
+        routerLink="/analytics"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Analytics
+      </a>
+    </li>
+
+    <!-- Login (Only when NOT logged in) -->
+    <li *ngIf="!authService.isLoggedIn()">
+      <a
+        routerLink="/login"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Login
+      </a>
+    </li>
+
+    <!-- Logout (Only when logged in) -->
+    <li *ngIf="authService.isLoggedIn()">
+      <button class="logout-btn" (click)="logout()">
+        Logout
+      </button>
+    </li>
   </ul>
 </nav>
 
+<!-- Theme Toggle -->
 <button class="theme-toggle" (click)="toggleTheme()">
   🌙
 </button>

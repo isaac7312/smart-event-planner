@@ -1,0 +1,108 @@
+/* ============================
+   DASHBOARD WRAPPER
+============================ */
+.dashboard-wrapper {
+  padding: 30px;
+  background: var(--bg-main);
+  min-height: calc(100vh - 70px); /* navbar height */
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ============================
+   HEADER
+============================ */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.dashboard-header h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ============================
+   LOGOUT BUTTON
+============================ */
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* ============================
+   TABLE
+============================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Header row */
+thead {
+  background: #4f46e5;
+  color: white;
+}
+
+th, td {
+  padding: 14px;
+  text-align: center;
+}
+
+/* ============================
+   TABLE ROWS
+============================ */
+tbody tr {
+  background: var(--table-row);
+  color: var(--text-primary);
+}
+
+tbody tr:nth-child(even) {
+  background: var(--table-row-alt);
+}
+
+/* ============================
+   ACTION BUTTONS
+============================ */
+.edit-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: #059669;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
