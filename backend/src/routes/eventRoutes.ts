@@ -1,18 +1,10 @@
-import express from "express";
-import {
-  createEvent,
-  getAllEvents,
-  getEventById,
-  getMyEvents
-} from "../controllers/eventController";
-import { authenticate } from "../middleware/authMiddleware";
+import express from 'express';
+import { getAllEvents, getEventById, getMyEvents } from '../controllers/eventController';
 
 const router = express.Router();
 
-// ✅ Routes
-router.post("/", createEvent);
-router.get("/", getAllEvents);
-router.get("/:id", getEventById);
-router.get("/my-events", authenticate, getMyEvents);
+router.get('/', getAllEvents);
+router.get('/my-events', getMyEvents);
+router.get('/:id', getEventById);
 
 export default router;

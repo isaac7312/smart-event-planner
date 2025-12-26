@@ -1,1 +1,14 @@
-<p>organizer-dashboard works!</p>
+<h2>My Events</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="!loading && events.length === 0">
+  No events created by you.
+</div>
+
+<div *ngFor="let event of events" class="event-card">
+  <h3>{{ event.name }}</h3>
+  <p>Venue: {{ event.venue }}</p>
+  <p>Date: {{ event.date_time | date }}</p>
+  <p>Capacity: {{ event.capacity }}</p>
+</div>
