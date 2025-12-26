@@ -1,14 +1,25 @@
-<h2>My Events</h2>
+<h2>Organizer Dashboard</h2>
 
-<div *ngIf="loading">Loading...</div>
+<p *ngIf="loading">Loading events...</p>
 
-<div *ngIf="!loading && events.length === 0">
-  No events created by you.
-</div>
+<table *ngIf="!loading && events.length > 0" border="1" cellpadding="8">
+  <tr>
+    <th>Event Name</th>
+    <th>Venue</th>
+    <th>Date</th>
+    <th>Capacity</th>
+    <th>Tickets Sold</th>
+  </tr>
 
-<div *ngFor="let event of events" class="event-card">
-  <h3>{{ event.name }}</h3>
-  <p>Venue: {{ event.venue }}</p>
-  <p>Date: {{ event.date_time | date }}</p>
-  <p>Capacity: {{ event.capacity }}</p>
-</div>
+  <tr *ngFor="let event of events">
+    <td>{{ event.name }}</td>
+    <td>{{ event.venue }}</td>
+    <td>{{ event.date_time | date:'medium' }}</td>
+    <td>{{ event.capacity }}</td>
+    <td>{{ event.tickets_sold }}</td>
+  </tr>
+</table>
+
+<p *ngIf="!loading && events.length === 0">
+  No events created yet.
+</p>

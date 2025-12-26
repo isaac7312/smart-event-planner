@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { EventsComponent } from './pages/events/events.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { AddEventComponent } from './pages/add-event/add-event.component';
@@ -8,10 +9,16 @@ import { OrganizerDashboardComponent } from './pages/organizer-dashboard/organiz
 
 export const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
+
+  // Attendee routes
   { path: 'events', component: EventsComponent },
-  { path: 'bookings/:id', component: BookingsComponent },
-  { path: 'add-event', component: AddEventComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'events/:id', component: EventDetailsComponent },
-  { path: 'organizer/dashboard', component: OrganizerDashboardComponent }
+  { path: 'bookings/:id', component: BookingsComponent },
+
+  // Organizer routes
+  { path: 'add-event', component: AddEventComponent },
+  { path: 'organizer/dashboard', component: OrganizerDashboardComponent },
+
+  // Auth
+  { path: 'login', component: LoginComponent }
 ];

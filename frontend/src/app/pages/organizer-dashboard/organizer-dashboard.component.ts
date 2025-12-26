@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-organizer-dashboard',
@@ -16,21 +16,14 @@ export class OrganizerDashboardComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    const token = localStorage.getItem('auth_token');
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-
-    this.http.get<any[]>('http://localhost:3000/events/my-events', { headers })
+    this.http.get<any[]>('http://localhost:3000/events/my-events')
       .subscribe({
         next: (data) => {
           this.events = data;
           this.loading = false;
         },
-        error: (err) => {
-          console.error(err);
-          alert('Failed to load organizer events');
+        error: () => {
+          alert('Failed to load events');
           this.loading = false;
         }
       });

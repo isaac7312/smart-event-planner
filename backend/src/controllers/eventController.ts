@@ -76,27 +76,33 @@ export const getEventById = (req: Request, res: Response) => {
   );
 };
 
-export const getMyEvents = async (req: any, res: any) => {
-  try {
-    const organizerId = 1; // FIXED (OK for viva)
+export const getMyEvents = (req: any, res: any) => {
+  const organizerId = 1; // fixed organizer for now
 
-    const events = await new Promise<any[]>((resolve, reject) => {
-      db.query(
-        'SELECT * FROM events WHERE organizer_id = ?',
-        [organizerId],
-        (err: any, results: any) => {
-          if (err) reject(err);
-          else resolve(results);
-        }
-      );
-    });
+  const query = `
+    SELECT 
+      e.id,
+      e.name,
+      e.venue,
+      e.date_time,
+      e.capacity,
+      IFNULL(SUM(b.tickets_booked), 0) AS tickets_sold
+    FROM events e
+    LEFT JOIN bookings b ON e.id = b.event_id
+    WHERE e.organizer_id = ?
+    GROUP BY e.id
+  `;
 
-    res.json(events);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to fetch events' });
-  }
+  db.query(query, [organizerId], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Failed to fetch events' });
+    }
+
+    res.json(results);
+  });
 };
+
 
 
 
