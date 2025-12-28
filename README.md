@@ -1,56 +1,55 @@
-# Smart Event Planner & Ticketing Platform
+🎉 Smart Event Planner
 
-A full-stack web application that allows users to discover events and organizers to create, manage, and analyze events with bookings and revenue insights.
-
+Smart Event Planner is a full-stack web application that allows event organizers to create, manage, and analyze events, while users can explore and book events easily.
+The platform focuses on simplicity, performance, and real-world usability.
 ---
 
-##  Features
+🚀 Features
+👤 Organizer Features
 
-###  User
-- Browse upcoming events
-- View event details
-- Book tickets
+Secure login using JWT authentication
+Create, edit, and delete events
+View all events created by the organizer
+Track bookings and event capacity
+Simple analytics dashboard for insights
 
-###  Organizer
-- Login & Logout
-- Create new events
-- Organizer dashboard
-- Delete events
-- View bookings & revenue analytics
-- Dark / Light theme support
+🌍 Public Features
 
----
+View all available events
+Event details with date, venue, price, and capacity
+Clean and responsive UI
 
-##  Tech Stack
+🔐 Security
 
-### Frontend
-- Angular (Standalone Components)
-- HTML, CSS
-- Chart.js (Analytics)
-- Responsive Dark UI
+Password hashing using bcrypt
+Token-based authentication using JWT
+Protected routes using middleware
+Role-based access (Organizer)
 
-### Backend
-- Node.js
-- Express.js
-- MySQL
-- JWT Authentication
+🛠 Tech Stack
+Frontend
 
----
+Angular (Standalone Components)
+HTML, CSS
+TypeScript
+Angular Router
+HTTP Interceptors
+Dark Mode UI support
 
-##  Analytics
-- Total Events
-- Total Bookings
-- Total Revenue
-- Bookings per Event (Bar Chart)
-- Revenue per Event (Bar Chart)
-- Capacity Utilization (%)
+Backend
 
----
+Node.js
+Express.js
+TypeScript
+JWT Authentication
+bcrypt (Password Hashing)
+MySQL Database
+Database
+MySQL
+Relational schema with users, events, and bookings
 
-##  Installation
+Deployment
 
-### Backend
-```bash
-cd backend
-npm install
-npm run dev
+Backend deployed on Render
+Frontend can be deployed on Vercel / Netlify
+GitHub for version control and collaboration
