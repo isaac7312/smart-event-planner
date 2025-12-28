@@ -2,53 +2,61 @@
   <div class="logo">Smart Event Planner</div>
 
   <ul class="nav-links">
-    <!-- Events (Public) -->
+
+    <!-- Public -->
     <li>
       <a
         routerLink="/events"
         routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
         class="nav-link"
       >
         Events
       </a>
     </li>
 
-    <!-- Add Event (Only when logged in) -->
-    <li *ngIf="authService.isLoggedIn()">
-      <a
-        routerLink="/add-event"
-        routerLinkActive="active"
-        class="nav-link"
-      >
-        Add Event
-      </a>
-    </li>
+    <!-- Organizer (Logged in) -->
+    <ng-container *ngIf="isLoggedIn()">
 
-    <!-- Dashboard (Only when logged in) -->
-    <li *ngIf="authService.isLoggedIn()">
-      <a
-        routerLink="/dashboard"
-        routerLinkActive="active"
-        class="nav-link"
-      >
-        Dashboard
-      </a>
-    </li>
+      <li>
+        <a
+          routerLink="/add-event"
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          Add Event
+        </a>
+      </li>
 
-    <!-- Analytics (Only when logged in) -->
-    <li *ngIf="authService.isLoggedIn()">
-      <a
-        routerLink="/analytics"
-        routerLinkActive="active"
-        class="nav-link"
-      >
-        Analytics
-      </a>
-    </li>
+      <li>
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          Dashboard
+        </a>
+      </li>
 
-    <!-- Login (Only when NOT logged in) -->
-    <li *ngIf="!authService.isLoggedIn()">
+      <li>
+        <a
+          routerLink="/analytics"
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          Analytics
+        </a>
+      </li>
+
+      <li>
+        <button class="logout-btn" (click)="logout()">
+          Logout
+        </button>
+      </li>
+
+    </ng-container>
+
+    <!-- Login -->
+    <li *ngIf="!isLoggedIn()">
       <a
         routerLink="/login"
         routerLinkActive="active"
@@ -58,16 +66,8 @@
       </a>
     </li>
 
-    <!-- Logout (Only when logged in) -->
-    <li *ngIf="authService.isLoggedIn()">
-      <button class="logout-btn" (click)="logout()">
-        Logout
-      </button>
-    </li>
   </ul>
 </nav>
 
 <!-- Theme Toggle -->
-<button class="theme-toggle" (click)="toggleTheme()">
-  🌙
-</button>
+<button class="theme-toggle" (click)="toggleTheme()">🌙</button>

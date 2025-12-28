@@ -38,7 +38,13 @@ export const routes: Routes = [
   loadComponent: () =>
     import('./pages/analytics/analytics.component')
       .then(m => m.AnalyticsComponent)
-  }
+  },
 
+  {
+  path: 'admin',
+  loadComponent: () =>
+    import('./pages/admin-dashboard/admin-dashboard.component')
+      .then(m => m.AdminDashboardComponent),
+  }
 
 ];

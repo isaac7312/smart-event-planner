@@ -1,0 +1,77 @@
+.edit-event-wrapper {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background: linear-gradient(135deg, #020617, #0f172a);
+}
+
+.edit-card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(2, 6, 23, 0.9);
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+}
+
+.edit-card h2 {
+  color: #f8fafc;
+  font-size: 28px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  margin-bottom: 25px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+label {
+  color: #cbd5f5;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #020617;
+  color: white;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.full-width {
+  margin-top: 20px;
+}
+
+.update-btn {
+  width: 100%;
+  margin-top: 30px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(90deg, #6366f1, #4f46e5);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.update-btn:hover {
+  opacity: 0.9;
+}

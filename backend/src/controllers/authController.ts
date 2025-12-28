@@ -1,40 +1,58 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import db from "../config/db";
 
 export const login = (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const query = `
-    SELECT * FROM organizers 
-    WHERE email = ? AND password = ?
-  `;
+  // 🛑 Validation
+  if (!email || !password) {
+    return res.status(400).json({
+      message: "Email and password required"
+    });
+  }
 
-  db.query(query, [email, password], (err, results: any[]) => {
+  const query = "SELECT * FROM users WHERE email = ?";
+
+  db.query(query, [email], async (err, results: any[]) => {
     if (err) {
-      return res.status(500).json({ message: "Server error" });
+      console.error(err);
+      return res.status(500).json({
+        message: "Server error"
+      });
     }
 
     if (results.length === 0) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({
+        message: "Invalid credentials"
+      });
     }
 
-    const organizer = results[0];
+    const user = results[0];
 
+    // 🔐 Compare password hash
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({
+        message: "Invalid credentials"
+      });
+    }
+
+    // 🔑 Create JWT token
     const token = jwt.sign(
-      { id: organizer.id, email: organizer.email },
-      "SECRET_KEY",
+      {
+        id: user.id,
+        email: user.email
+      },
+      process.env.JWT_SECRET || "SECRET_KEY",
       { expiresIn: "1d" }
     );
 
+    // ✅ SUCCESS RESPONSE
     res.json({
       message: "Login successful",
-      token,
-      organizer: {
-        id: organizer.id,
-        name: organizer.name,
-        email: organizer.email
-      }
+      token
     });
   });
 };

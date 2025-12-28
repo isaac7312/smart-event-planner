@@ -12,6 +12,7 @@ export class AuthService {
     private router: Router
   ) {}
 
+  // 🔐 LOGIN
   login(email: string, password: string) {
     return this.http.post<any>(`${this.apiUrl}/login`, {
       email,
@@ -19,19 +20,19 @@ export class AuthService {
     });
   }
 
-  saveToken(token: string) {
+  // 💾 SAVE TOKEN
+  saveLogin(token: string) {
     localStorage.setItem('token', token);
   }
 
+  // ✅ AUTH CHECK
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
+  // 🚪 LOGOUT
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-
-    // ✅ redirect to login after logout
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }

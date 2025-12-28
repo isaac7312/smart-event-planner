@@ -1,0 +1,34 @@
+<div class="admin-page">
+
+  <div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <p>Manage application users</p>
+  </div>
+
+  <div class="admin-card">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span
+              class="role-badge"
+              [ngClass]="user.role === 'admin' ? 'admin' : 'user'"
+            >
+              {{ user.role | uppercase }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

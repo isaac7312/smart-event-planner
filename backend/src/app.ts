@@ -11,6 +11,7 @@ import bookingRoutes from "./routes/bookingRoutes";
 import dashboardRoutes from "./routes/dashboardRoutes";
 import authRoutes from "./routes/authRoutes";
 
+
 const app = express();
 
 /* ---------- MIDDLEWARES (VERY IMPORTANT ORDER) ---------- */
@@ -24,6 +25,7 @@ app.use("/users", userRoutes);
 app.use("/bookings", bookingRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/auth", authRoutes);
+
 
 /* ---------- HEALTH CHECK ---------- */
 app.get("/health", (req, res) => {

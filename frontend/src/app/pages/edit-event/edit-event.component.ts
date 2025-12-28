@@ -8,12 +8,22 @@ import { EventService } from '../../services/event.service';
   selector: 'app-edit-event',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './edit-event.component.html'
+  templateUrl: './edit-event.component.html',
+  styleUrls: ['./edit-event.component.css']
 })
 export class EditEventComponent implements OnInit {
 
   eventId!: number;
-  event: any = {};
+
+  event = {
+    name: '',
+    description: '',
+    venue: '',
+    category: '',
+    date_time: '',
+    capacity: 1,
+    price: 0
+  };
 
   successMessage = '';
   errorMessage = '';
@@ -29,22 +39,56 @@ export class EditEventComponent implements OnInit {
 
     this.eventService.getEventById(this.eventId.toString()).subscribe({
       next: (data) => {
-        this.event = data;
-        this.event.date_time = data.date_time?.slice(0, 16);
+        this.event = {
+          ...data,
+          // ✅ convert MySQL datetime → yyyy-MM-dd
+          date_time: data.date_time?.split('T')[0] || ''
+        };
+      },
+      error: () => {
+        this.errorMessage = 'Failed to load event details';
       }
     });
   }
 
   updateEvent() {
-    this.eventService.updateEvent(this.eventId, this.event).subscribe({
+
+    if (!this.event.name || !this.event.venue || !this.event.category) {
+      this.errorMessage = 'Please fill all required fields';
+      return;
+    }
+
+    if (this.event.capacity <= 0) {
+      this.errorMessage = 'Capacity must be greater than zero';
+      return;
+    }
+
+    if (this.event.price < 0) {
+      this.errorMessage = 'Price cannot be negative';
+      return;
+    }
+
+    // ✅ format date for backend
+    const payload = {
+      ...this.event,
+      date_time: new Date(this.event.date_time)
+        .toISOString()
+        .slice(0, 19)
+        .replace('T', ' ')
+    };
+
+    this.eventService.updateEvent(this.eventId, payload).subscribe({
       next: () => {
         this.successMessage = 'Event updated successfully';
+        this.errorMessage = '';
+
         setTimeout(() => {
           this.router.navigate(['/dashboard']);
         }, 1000);
       },
       error: (err) => {
         this.errorMessage = err?.error?.message || 'Update failed';
+        this.successMessage = '';
       }
     });
   }

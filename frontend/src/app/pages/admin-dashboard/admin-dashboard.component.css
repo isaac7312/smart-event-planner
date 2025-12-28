@@ -1,0 +1,79 @@
+/* PAGE */
+.admin-page {
+  min-height: calc(100vh - 80px);
+  padding: 40px 60px;
+  transition: background 0.3s ease;
+}
+
+/* HEADER */
+.admin-header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.admin-header p {
+  margin-bottom: 25px;
+  color: #64748b;
+}
+
+/* CARD */
+.admin-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0f172a, #020617);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* TABLE */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  background: #4f46e5;
+  color: white;
+  padding: 14px;
+  text-align: left;
+}
+
+.admin-table td {
+  padding: 14px;
+  color: #e5e7eb;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ROLE BADGES */
+.role-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.role-badge.admin {
+  background: #22c55e;
+  color: white;
+}
+
+.role-badge.user {
+  background: #3b82f6;
+  color: white;
+}
+
+/* 🌙 DARK MODE BACKGROUND FIX */
+body.dark-theme .admin-page {
+  background: linear-gradient(180deg, #020617, #000000);
+}
+
+body.dark-theme .admin-header h1 {
+  color: #f8fafc;
+}
+
+body.dark-theme .admin-header p {
+  color: #94a3b8;
+}

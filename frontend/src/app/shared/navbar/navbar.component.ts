@@ -14,11 +14,16 @@ export class NavbarComponent {
 
   constructor(public authService: AuthService) {}
 
-  toggleTheme() {
-    document.body.classList.toggle('dark-theme');
+  // ✅ Only one check now
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  toggleTheme() {
+    document.body.classList.toggle('dark-theme');
   }
 }
