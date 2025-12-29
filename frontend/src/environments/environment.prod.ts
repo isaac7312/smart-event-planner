@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://smart-event-planner-1-fsba.onrender.com'
+  apiBaseUrl: 'https://smart-event-planner-production-a65e.up.railway.app'
 };

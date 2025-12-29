@@ -10,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.post('/', createEvent);       // ⭐ THIS WAS MISSING
+router.post('/', createEvent);
 router.get('/', getAllEvents);
 router.get('/my-events', getMyEvents);
 router.get('/:id', getEventById);

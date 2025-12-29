@@ -6,6 +6,7 @@ import cors from "cors";
 
 import "./config/db";
 
+// Routes
 import eventRoutes from "./routes/eventRoutes";
 import userRoutes from "./routes/userRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
@@ -14,17 +15,27 @@ import authRoutes from "./routes/authRoutes";
 
 const app = express();
 
-/* ---------- MIDDLEWARES (ORDER MATTERS) ---------- */
+/* ---------- CORS CONFIG ---------- */
+const allowedOrigins = [
+  "http://localhost:4200", // local Angular
+  // add frontend URL here after deploy
+  // "https://your-frontend.netlify.app"
+];
 
-// CORS (for Netlify / frontend access)
 app.use(
   cors({
-    origin: "*", // 🔒 change to frontend URL after deploy
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
 
-// Body parsers
+/* ---------- BODY PARSERS ---------- */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -44,7 +55,7 @@ app.get("/health", (_req, res) => {
 });
 
 /* ---------- SERVER ---------- */
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
