@@ -15,23 +15,11 @@ import authRoutes from "./routes/authRoutes";
 
 const app = express();
 
-/* ---------- CORS CONFIG ---------- */
-const allowedOrigins = [
-  "http://localhost:4200", // local Angular
-  // add frontend URL here after deploy
-  // "https://your-frontend.netlify.app"
-];
-
+/* ---------- CORS CONFIG (FIXED) ---------- */
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
+    origin: true,        // ✅ allows Netlify, mobile, localhost
+    credentials: true,   // ✅ allow cookies / auth headers
   })
 );
 
