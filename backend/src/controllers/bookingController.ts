@@ -11,7 +11,7 @@ export const createBooking = (req: Request, res: Response) => {
   const attendeeId = 1;// TEMP user
   const pricePerTicket = 100;
 
-  // 1️⃣ Get event capacity
+  //Get event capacity
   db.query(
     'SELECT capacity FROM events WHERE id = ?',
     [eventId],
@@ -22,7 +22,7 @@ export const createBooking = (req: Request, res: Response) => {
 
       const capacity = eventResult[0].capacity;
 
-      // 2️⃣ Get already booked tickets
+      //Get already booked tickets
       db.query(
         'SELECT IFNULL(SUM(tickets_booked), 0) AS booked FROM bookings WHERE event_id = ?',
         [eventId],
@@ -32,7 +32,7 @@ export const createBooking = (req: Request, res: Response) => {
           const booked = bookingResult[0].booked;
           const available = capacity - booked;
 
-          // 3️⃣ Prevent overbooking
+          // Prevent overbooking
           if (tickets > available) {
             return res.status(400).json({
               message: `Only ${available} tickets available`

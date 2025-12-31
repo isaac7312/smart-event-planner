@@ -6,10 +6,10 @@ dotenv.config();
 let db;
 
 if (process.env.MYSQL_URL) {
-  // ✅ Railway / production
+  // Railway / production
   db = mysql.createConnection(process.env.MYSQL_URL);
 } else {
-  // ✅ Local VS Code
+  // Local VS Code
   db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,

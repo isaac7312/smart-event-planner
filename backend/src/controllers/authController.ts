@@ -6,7 +6,7 @@ import db from "../config/db";
 export const login = (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  // 🛑 Validation
+  // Validation
   if (!email || !password) {
     return res.status(400).json({
       message: "Email and password required"
@@ -31,7 +31,7 @@ export const login = (req: Request, res: Response) => {
 
     const user = results[0];
 
-    // 🔐 Compare password hash
+    //  Compare password hash
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({
@@ -39,7 +39,7 @@ export const login = (req: Request, res: Response) => {
       });
     }
 
-    // 🔑 Create JWT token
+    //  Create JWT token
     const token = jwt.sign(
       {
         id: user.id,
@@ -49,7 +49,7 @@ export const login = (req: Request, res: Response) => {
       { expiresIn: "1d" }
     );
 
-    // ✅ SUCCESS RESPONSE
+    //  SUCCESS RESPONSE
     res.json({
       message: "Login successful",
       token
