@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { QRCodeModule } from 'angularx-qrcode';
-import { HttpClient } from '@angular/common/http';
+import { BookingService } from '../../services/booking.service';
 
 @Component({
   selector: 'app-bookings',
@@ -20,7 +20,7 @@ export class BookingsComponent implements OnInit {
   eventId!: number;
 
   constructor(
-    private http: HttpClient,
+    private bookingService: BookingService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -35,21 +35,21 @@ export class BookingsComponent implements OnInit {
       return;
     }
 
-    this.http.post<any>('http://localhost:3000/bookings', {
-      eventId: this.eventId,
-      tickets: this.tickets
-    }).subscribe({
-      next: () => {
+    this.bookingService.createBooking(this.eventId, this.tickets).subscribe({
+      next: (res: any) => {
         this.bookingConfirmed = true;
+
+        // ✅ QR CODE DATA
         this.qrData = JSON.stringify({
-          bookingId: Date.now(),
+          bookingId: res.bookingId || Date.now(),
           eventId: this.eventId,
           tickets: this.tickets,
           app: 'Smart Event Planner'
         });
       },
       error: (err) => {
-        alert(err.error.message || 'Booking failed');
+        console.error(err);
+        alert(err.error?.message || 'Booking failed');
       }
     });
   }

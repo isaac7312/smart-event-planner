@@ -5,8 +5,9 @@ import db from "../config/db";
  * CREATE EVENT
  */
 export const createEvent = (req: Request, res: Response) => {
+  console.log("🔥 CREATE EVENT API HIT 🔥");
+  console.log("BODY 👉", req.body);
   const {
-    organizer_id,
     name,
     description,
     venue,
@@ -16,17 +17,12 @@ export const createEvent = (req: Request, res: Response) => {
     price
   } = req.body;
 
-  // Validation
-  if (!capacity || capacity <= 0) {
-    return res.status(400).json({
-      message: "Capacity must be greater than zero"
-    });
-  }
+  const organizer_id = 1;
 
-  if (price === undefined || price < 0) {
-    return res.status(400).json({
-      message: "Price must be zero or greater"
-    });
+  console.log("CREATE EVENT BODY 👉", req.body);
+
+  if (!name || !venue || !category || !date_time) {
+    return res.status(400).json({ message: "Missing required fields" });
   }
 
   const query = `
@@ -42,36 +38,25 @@ export const createEvent = (req: Request, res: Response) => {
       name,
       description,
       venue,
-      date_time,
+      date_time,   // ✅ NO STR_TO_DATE
       category,
       capacity,
       price
     ],
     (err) => {
       if (err) {
-        console.error(err);
-        return res.status(500).json({
-          message: "Error creating event"
-        });
+        console.error("MYSQL ERROR 👉", err);
+        return res.status(500).json({ message: err.message });
       }
 
       res.status(201).json({
         success: true,
-         message: "Event created successfully",
-         data: {
-          organizer_id,
-          name,
-          description,
-          venue,
-          date_time,
-          category,
-          capacity,
-          price
-         }
+        message: "Event created successfully"
       });
     }
   );
 };
+
 
 /**
  * GET ALL EVENTS (For users / homepage)

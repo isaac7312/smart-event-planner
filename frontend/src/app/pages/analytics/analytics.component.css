@@ -1,18 +1,28 @@
+/* ===== Analytics Page Wrapper ===== */
 .analytics-wrapper {
   min-height: calc(100vh - 80px);
   padding: 30px;
 }
 
+/* Light mode page background */
+body.light-mode .analytics-wrapper {
+  background: #f8fafc;
+}
 
-/* Page title */
+/* Dark mode page background */
+body.dark-mode .analytics-wrapper {
+  background: linear-gradient(180deg, #020617, #020617);
+}
+
+/* ===== Page Title ===== */
 .analytics-wrapper h2 {
   margin-bottom: 25px;
   font-size: 26px;
   font-weight: 600;
-  color: #f8fafc;
+  color: #f8fafc; /* ALWAYS dark-style title */
 }
 
-/* 🔢 Stats Cards */
+/* ===== Stats Cards Grid ===== */
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -20,6 +30,7 @@
   margin-bottom: 35px;
 }
 
+/* ===== Cards (ALWAYS DARK) ===== */
 .card {
   background: #020617;
   padding: 22px;
@@ -44,14 +55,14 @@
   color: #f8fafc;
 }
 
-/* 📊 Charts Grid */
+/* ===== Charts Grid ===== */
 .charts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
 
-/* Individual chart container */
+/* ===== Chart Boxes (ALWAYS DARK) ===== */
 .chart-box {
   background: #020617;
   padding: 22px;
@@ -66,8 +77,23 @@
   color: #f8fafc;
 }
 
-/* Canvas responsiveness */
+/* ===== Canvas ===== */
 .chart-box canvas {
   width: 100% !important;
   height: auto !important;
 }
+
+
+/* === Analytics Heading FIX (mode-proof) === */
+.analytics-title {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  background: #020617;   /* dark background */
+  color: #f8fafc;        /* white text */
+  font-size: 26px;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+

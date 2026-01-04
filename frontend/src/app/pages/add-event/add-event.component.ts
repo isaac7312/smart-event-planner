@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-add-event',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.css'] // ✅ VERY IMPORTANT
+  styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent {
 
   event = {
-    organizer_id: 1,
     name: '',
     description: '',
     venue: '',
@@ -26,21 +26,26 @@ export class AddEventComponent {
   successMessage = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private eventService: EventService,
+    private router: Router
+  ) {}
 
   createEvent() {
-    // reset messages
+    console.log('🔥 CREATE EVENT CLICKED');
+    console.log('EVENT DATA 👉', this.event);
+
     this.successMessage = '';
     this.errorMessage = '';
 
-    // 🔹 Validations
+    // validations
     if (!this.event.name || !this.event.venue || !this.event.category) {
       this.errorMessage = 'Please fill all required fields';
       return;
     }
 
     if (!this.event.date_time) {
-      this.errorMessage = 'Please select a date';
+      this.errorMessage = 'Please select date and time';
       return;
     }
 
@@ -54,33 +59,19 @@ export class AddEventComponent {
       return;
     }
 
-    // 🔹 Convert date to MySQL DATETIME
+    // MySQL safe datetime
     const payload = {
       ...this.event,
-      date_time: new Date(this.event.date_time)
-        .toISOString()
-        .slice(0, 19)
-        .replace('T', ' ')
+      date_time: this.event.date_time.replace('T', ' ')
     };
 
-    this.http.post('http://localhost:3000/events', payload).subscribe({
+    this.eventService.createEvent(payload).subscribe({
       next: () => {
-        this.successMessage = 'Event created successfully';
-
-        // reset form
-        this.event = {
-          organizer_id: 1,
-          name: '',
-          description: '',
-          venue: '',
-          category: '',
-          date_time: '',
-          capacity: 1,
-          price: 0
-        };
+        alert('Event created successfully');
+        this.router.navigate(['/events']);
       },
       error: (err) => {
-        console.error(err);
+        console.error('❌ Create Event Error:', err);
         this.errorMessage = err?.error?.message || 'Error creating event';
       }
     });
